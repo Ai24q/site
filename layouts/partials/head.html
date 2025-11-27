@@ -1,0 +1,39 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ if .IsHome }}{{ site.Title }} | {{ site.Params.description }}{{ else }}{{ .Title }} | {{ site.Title }}{{ end }}</title>
+<link rel="apple-touch-icon" sizes="180x180" href="{{ site.Params.favicon }}apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ site.Params.favicon }}favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ site.Params.favicon }}favicon-16x16.png">
+<link rel="manifest" href="{{ site.Params.favicon }}site.webmanifest">
+<meta name="google-site-verification" content="gR7ds0ZEIQybLoFDWoTmr1NM7AvbDKhE43C9WVo0OvY" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@300;500;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: { 'neo-bg': '#FFFAE5', 'neo-main': '#FF4D00', 'neo-accent': '#A3FF00', 'neo-purple': '#9D00FF', 'neo-black': '#0f0f0f', 'neo-white': '#ffffff', 'neo-blue': '#0047FF' },
+        fontFamily: { 'display': ['"Syne"', 'sans-serif'], 'body': ['"Space Grotesk"', 'sans-serif'], 'heavy': ['"Archivo Black"', 'sans-serif'], },
+        boxShadow: { 'neo': '8px 8px 0px 0px #0f0f0f', 'neo-sm': '4px 4px 0px 0px #0f0f0f', 'neo-lg': '12px 12px 0px 0px #0f0f0f', 'neo-hover': '12px 12px 0px 0px #0f0f0f', 'neo-active': '2px 2px 0px 0px #0f0f0f', },
+        cursor: { 'none': 'none' }
+      }
+    }
+  }
+</script>
+<style>
+  body { background-color: #FFFAE5; color: #0f0f0f; overflow-x: hidden; cursor: none; }
+  ::selection { background-color: #0f0f0f; color: #A3FF00; }
+  ::-webkit-scrollbar { width: 16px; } ::-webkit-scrollbar-track { background: #FFFAE5; border-left: 3px solid #0f0f0f; } ::-webkit-scrollbar-thumb { background: #0f0f0f; border: 3px solid #FFFAE5; } ::-webkit-scrollbar-thumb:hover { background: #FF4D00; }
+  .text-outline { -webkit-text-stroke: 2px #0f0f0f; color: transparent; }
+  .text-outline-white { -webkit-text-stroke: 2px #ffffff; color: transparent; }
+  .grain { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E"); z-index: 9998; }
+  .marquee-container { overflow: hidden; white-space: nowrap; } .marquee-content { display: inline-block; animation: marquee 20s linear infinite; } @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+  #cursor { position: fixed; top: 0; left: 0; width: 24px; height: 24px; background-color: #0f0f0f; border-radius: 0%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: width 0.2s, height 0.2s, background-color 0.2s; mix-blend-mode: difference; }
+  #loader { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: #0f0f0f; z-index: 10000; display: flex; justify-content: center; align-items: center; } .loader-bar { width: 20px; height: 0%; background: #A3FF00; margin: 0 5px; }
+  #mobile-menu { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: #0f0f0f; color: #FFFAE5; z-index: 9997; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2rem; font-size: 2.5rem; font-family: '"Archivo Black"', sans-serif; text-transform: uppercase; transform: translateY(-100%); transition: transform 0.4s ease; } #mobile-menu.open { transform: translateY(0); } #mobile-menu a { color: #A3FF00; text-decoration: none; } #mobile-menu a:hover { text-decoration: line-through; }
+  .faq-item { border: 4px solid black; box-shadow: 8px 8px 0px 0px #0f0f0f; transition: all 0.2s ease; } .faq-item:hover { transform: translate(-2px, -2px); box-shadow: 10px 10px 0px 0px #0f0f0f; } .faq-item[open] { background-color: #A3FF00; } .faq-item summary { padding: 1.5rem; font-weight: bold; font-size: 1.25rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; } .faq-item summary::-webkit-details-marker { display: none; } .faq-item summary::after { content: '+'; font-size: 2rem; font-family: 'Archivo Black', sans-serif; } .faq-item[open] summary::after { content: '−'; } .faq-item p { padding: 0 1.5rem 1.5rem; font-size: 1.1rem; }
+  @media (pointer: coarse), (max-width: 768px) { body { cursor: auto !important; } #cursor { display: none !important; } }
+</style>
