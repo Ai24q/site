@@ -1,0 +1,138 @@
+backend:
+  name: github
+  repo: Ai24q/site
+  branch: main
+  base_url: https://sveltia-cms-auth.netlify.app
+
+# Локальний режим для тестування (опціонально)
+# local_backend: true
+
+# Медіа-файли
+media_folder: "static/images/uploads"
+public_folder: "/images/uploads"
+
+# Налаштування сайту
+site_url: https://ai24q.pages.dev
+display_url: https://ai24q.pages.dev
+logo_url: https://ai24q.pages.dev/favicon/android-chrome-192x192.png
+
+# Локалізація
+locale: uk
+
+# Колекції контенту
+collections:
+  # БЛОГ
+  - name: "blog"
+    label: "📝 Статті блогу"
+    label_singular: "Стаття"
+    folder: "content/blog"
+    create: true
+    slug: "{{slug}}"
+    preview_path: "blog/{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - label: "Заголовок"
+        name: "title"
+        widget: "string"
+        hint: "Назва статті (наприклад: Як ШІ змінює світ)"
+      
+      - label: "Опис"
+        name: "description"
+        widget: "text"
+        hint: "Короткий опис статті для превью (1-2 речення)"
+        required: false
+      
+      - label: "Дата публікації"
+        name: "date"
+        widget: "datetime"
+        format: "YYYY-MM-DD"
+        date_format: "DD.MM.YYYY"
+        time_format: false
+        default: ""
+      
+      - label: "Головне зображення"
+        name: "image"
+        widget: "image"
+        required: false
+        hint: "Рекомендований розмір: 1200x630px"
+        media_library:
+          config:
+            multiple: false
+      
+      - label: "Теги"
+        name: "tags"
+        widget: "list"
+        required: false
+        hint: "Додайте теги через Enter (наприклад: AI, Технології, Майбутнє)"
+        field:
+          label: "Тег"
+          name: "tag"
+          widget: "string"
+      
+      - label: "Категорії"
+        name: "categories"
+        widget: "list"
+        required: false
+        hint: "Категорії статті"
+        field:
+          label: "Категорія"
+          name: "category"
+          widget: "string"
+      
+      - label: "Чернетка"
+        name: "draft"
+        widget: "boolean"
+        default: false
+        required: false
+        hint: "Якщо увімкнено, стаття не буде опублікована"
+      
+      - label: "Зміст статті"
+        name: "body"
+        widget: "markdown"
+        hint: "Основний текст статті в форматі Markdown"
+        buttons:
+          - bold
+          - italic
+          - code
+          - link
+          - heading-two
+          - heading-three
+          - quote
+          - bulleted-list
+          - numbered-list
+        editor_components:
+          - image
+          - code-block
+
+  # НАЛАШТУВАННЯ САЙТУ (опціонально)
+  - name: "settings"
+    label: "⚙️ Налаштування"
+    files:
+      - label: "Загальні налаштування"
+        name: "general"
+        file: "config.yml"
+        fields:
+          - label: "Назва сайту"
+            name: "title"
+            widget: "string"
+          
+          - label: "URL сайту"
+            name: "baseURL"
+            widget: "string"
+          
+          - label: "Мова"
+            name: "languageCode"
+            widget: "string"
+          
+          - label: "Параметри"
+            name: "params"
+            widget: "object"
+            fields:
+              - label: "Опис сайту"
+                name: "description"
+                widget: "string"
+              
+              - label: "Автор"
+                name: "author"
+                widget: "string"
