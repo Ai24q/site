@@ -4,9 +4,6 @@ backend:
   branch: main
   base_url: https://sveltia-cms-auth.netlify.app
 
-# Локальний режим для тестування (опціонально)
-# local_backend: true
-
 # Медіа-файли
 media_folder: "static/images/uploads"
 public_folder: "/images/uploads"
@@ -91,48 +88,3 @@ collections:
         name: "body"
         widget: "markdown"
         hint: "Основний текст статті в форматі Markdown"
-        buttons:
-          - bold
-          - italic
-          - code
-          - link
-          - heading-two
-          - heading-three
-          - quote
-          - bulleted-list
-          - numbered-list
-        editor_components:
-          - image
-          - code-block
-
-  # НАЛАШТУВАННЯ САЙТУ (опціонально)
-  - name: "settings"
-    label: "⚙️ Налаштування"
-    files:
-      - label: "Загальні налаштування"
-        name: "general"
-        file: "config.yml"
-        fields:
-          - label: "Назва сайту"
-            name: "title"
-            widget: "string"
-          
-          - label: "URL сайту"
-            name: "baseURL"
-            widget: "string"
-          
-          - label: "Мова"
-            name: "languageCode"
-            widget: "string"
-          
-          - label: "Параметри"
-            name: "params"
-            widget: "object"
-            fields:
-              - label: "Опис сайту"
-                name: "description"
-                widget: "string"
-              
-              - label: "Автор"
-                name: "author"
-                widget: "string"
