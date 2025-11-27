@@ -29,3 +29,44 @@
   <!-- Sveltia CMS завантажиться автоматично -->
 </body>
 </html>
+```
+
+---
+
+## ✅ Крок 4: Вхід в CMS
+
+Тепер **ВСЕ ГОТОВО**! 🎉
+
+### Як увійти:
+
+1. Перейдіть на: **https://ai24q.pages.dev/admin**
+2. Натисніть **"Увійти за допомогою GitHub"**
+3. GitHub попросить дозвіл — **натисніть "Authorize"**
+4. Ви в адмін-панелі! 🚀
+
+---
+
+# 📚 SEO: Де що налаштовується
+
+## 🗂️ Структура проекту:
+```
+Ai24q/site/
+├── config.yml                    ← Загальні SEO (title, description)
+├── content/
+│   ├── _index.md                 ← Головна сторінка (мета-дані)
+│   └── blog/
+│       ├── _index.md             ← Сторінка блогу (мета-дані)
+│       └── post-name.md          ← Окрема стаття (title, description, image)
+├── layouts/
+│   ├── _default/
+│   │   └── baseof.html           ← Основний HTML (тут <head>)
+│   ├── partials/
+│   │   └── head.html             ← SEO мета-теги, Open Graph, Twitter Cards
+│   ├── index.html                ← Головна сторінка
+│   └── blog/
+│       ├── list.html             ← Список статей
+│       └── single.html           ← Окрема стаття
+└── static/
+    ├── admin/                    ← CMS
+    ├── favicon/                  ← Іконки
+    └── images/uploads/           ← Зображення для статей
