@@ -1,0 +1,18 @@
+baseURL: 'https://ai24q.pages.dev'
+languageCode: 'uk-ua'
+title: 'Ai24q'
+theme: []
+
+params:
+  description: "Розумні рішення на основі ШІ"
+  author: "Ai24q"
+  favicon: "/favicon/"
+  
+# Налаштування для блогу
+permalinks:
+  blog: /blog/:slug/
+
+# Таксономії (теги та категорії)
+taxonomies:
+  tag: tags
+  category: categories
