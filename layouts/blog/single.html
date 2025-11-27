@@ -1,0 +1,214 @@
+{{ define "main" }}
+<!-- Article Header -->
+<article class="bg-neo-bg">
+  <!-- Hero -->
+  <header class="relative py-20 md:py-32 px-4 border-b-4 border-black bg-neo-black text-neo-bg overflow-hidden">
+    <div class="absolute inset-0 opacity-10">
+      {{ if .Params.image }}
+      <img src="{{ .Params.image }}" alt="" class="w-full h-full object-cover">
+      {{ end }}
+    </div>
+    
+    <div class="container mx-auto max-w-4xl relative z-10">
+      <!-- Теги -->
+      <div class="flex flex-wrap gap-2 mb-6">
+        {{ range .Params.tags }}
+        <a href="/tags/{{ . | urlize }}" class="px-4 py-2 bg-neo-accent border-2 border-white text-sm font-heavy uppercase shadow-neo-sm hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all">
+          {{ . }}
+        </a>
+        {{ end }}
+      </div>
+      
+      <!-- Заголовок -->
+      <h1 class="font-heavy text-4xl md:text-6xl lg:text-7xl mb-6 leading-tight text-neo-accent">
+        {{ .Title }}
+      </h1>
+      
+      <!-- Опис -->
+      {{ if .Params.description }}
+      <p class="font-body text-xl md:text-2xl font-bold mb-8 leading-relaxed">
+        {{ .Params.description }}
+      </p>
+      {{ end }}
+      
+      <!-- Мета-інформація -->
+      <div class="flex flex-wrap items-center gap-6 font-mono text-sm text-gray-400">
+        <time class="flex items-center gap-2">
+          <i data-lucide="calendar" class="w-4 h-4"></i>
+          {{ .Date.Format "02 January 2006" }}
+        </time>
+        <span class="flex items-center gap-2">
+          <i data-lucide="clock" class="w-4 h-4"></i>
+          {{ .ReadingTime }} хв читання
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Featured Image -->
+  {{ if .Params.image }}
+  <div class="container mx-auto max-w-5xl px-4 -mt-16 relative z-20">
+    <div class="border-4 border-black shadow-neo-lg overflow-hidden">
+      <img src="{{ .Params.image }}" alt="{{ .Title }}" class="w-full h-auto">
+    </div>
+  </div>
+  {{ end }}
+
+  <!-- Article Content -->
+  <div class="container mx-auto max-w-3xl px-4 py-16 md:py-24">
+    <div class="prose prose-lg md:prose-xl max-w-none article-content">
+      {{ .Content }}
+    </div>
+  </div>
+
+  <!-- Share & Back -->
+  <div class="container mx-auto max-w-3xl px-4 pb-16 border-t-4 border-black pt-8">
+    <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+      <a href="/blog" class="group flex items-center gap-2 font-heavy text-lg hover:text-neo-main transition-colors">
+        <i data-lucide="arrow-left" class="w-5 h-5 group-hover:-translate-x-1 transition-transform"></i>
+        НАЗАД ДО БЛОГУ
+      </a>
+      
+      <div class="flex gap-4">
+        <a href="https://t.me/share/url?url={{ .Permalink }}&text={{ .Title }}" target="_blank" class="p-3 border-4 border-black bg-neo-accent shadow-neo hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all">
+          <i data-lucide="send" class="w-5 h-5"></i>
+        </a>
+        <button onclick="navigator.share({title: '{{ .Title }}', url: '{{ .Permalink }}'})" class="p-3 border-4 border-black bg-neo-purple text-white shadow-neo hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all">
+          <i data-lucide="share-2" class="w-5 h-5"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- Related Posts -->
+{{ $related := .Site.RegularPages.Related . | first 3 }}
+{{ if $related }}
+<section class="py-16 md:py-24 bg-neo-blue border-t-4 border-black">
+  <div class="container mx-auto px-4">
+    <h2 class="font-heavy text-4xl md:text-6xl text-center mb-12 text-white">СХОЖІ СТАТТІ</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+      {{ range $related }}
+      <article class="group">
+        <a href="{{ .Permalink }}" class="block">
+          <div class="border-4 border-black shadow-neo bg-white overflow-hidden group-hover:shadow-neo-lg group-hover:-translate-y-2 transition-all">
+            {{ if .Params.image }}
+            <img src="{{ .Params.image }}" alt="{{ .Title }}" class="w-full h-48 object-cover filter grayscale group-hover:grayscale-0 transition-all">
+            {{ else }}
+            <div class="w-full h-48 bg-neo-accent"></div>
+            {{ end }}
+            <div class="p-6">
+              <h3 class="font-heavy text-xl mb-2 group-hover:text-neo-main transition-colors">{{ .Title }}</h3>
+              <p class="text-sm text-gray-600 line-clamp-2">{{ .Summary }}</p>
+            </div>
+          </div>
+        </a>
+      </article>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+
+<style>
+/* Стилі для контенту статті (Medium-style) */
+.article-content {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: #1a1a1a;
+}
+
+.article-content h2 {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 2rem;
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+  color: #0f0f0f;
+}
+
+.article-content h3 {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.article-content p {
+  margin-bottom: 1.75rem;
+}
+
+.article-content strong {
+  font-weight: 700;
+  color: #FF4D00;
+}
+
+.article-content a {
+  color: #0047FF;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  transition: all 0.2s;
+}
+
+.article-content a:hover {
+  color: #FF4D00;
+  text-decoration-thickness: 3px;
+}
+
+.article-content ul, .article-content ol {
+  margin-bottom: 1.75rem;
+  padding-left: 2rem;
+}
+
+.article-content li {
+  margin-bottom: 0.75rem;
+}
+
+.article-content blockquote {
+  border-left: 6px solid #A3FF00;
+  padding-left: 1.5rem;
+  margin: 2rem 0;
+  font-style: italic;
+  font-size: 1.25rem;
+  color: #333;
+  background: #FFFAE5;
+  padding: 1.5rem;
+  border: 4px solid #0f0f0f;
+  box-shadow: 4px 4px 0px 0px #0f0f0f;
+}
+
+.article-content code {
+  background: #0f0f0f;
+  color: #A3FF00;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9em;
+}
+
+.article-content pre {
+  background: #0f0f0f;
+  border: 4px solid #A3FF00;
+  padding: 1.5rem;
+  overflow-x: auto;
+  margin: 2rem 0;
+  box-shadow: 8px 8px 0px 0px #A3FF00;
+}
+
+.article-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.article-content img {
+  width: 100%;
+  height: auto;
+  margin: 2rem 0;
+  border: 4px solid #0f0f0f;
+  box-shadow: 8px 8px 0px 0px #0f0f0f;
+}
+</style>
+{{ end }}
